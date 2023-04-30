@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ALFRED-AI</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/@webcomponents/webcomponentsjs@^2.2.0"></script>
+    <script src="https://unpkg.com/@web-speech-api/web-speech-ai@^2.2.0"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">ALFRED</h1>
+      <div class="chat-window">
+        <ul class="message-list"></ul>
+        <form class="message-form">
+          <input
+            type="text"
+            name="message"
+            placeholder="Type your message here..."
+            autocomplete="off"
+          />
+          <button type="submit">Send</button>
+          <button type="button" id="mic-btn">
+            <i class="fa fa-microphone"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+      const recognition = new webkitSpeechRecognition();
+      const micBtn = document.querySelector("#mic-btn");
+      const messageInput = $('input[name="message"]');
+      let isListening = false;
+
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = "en-US";
+
+      micBtn.addEventListener("click", () => {
+        if (isListening) {
+          recognition.stop();
+          micBtn.classList.remove("listening");
+        } else {
+          recognition.start();
+          micBtn.classList.add("listening");
+        }
+        isListening = !isListening;
+      });
+
+      recognition.onresult = (event) => {
+        const transcript = Array.from(event.results)
+          .map((result) => result[0])
+          .map((result) => result.transcript)
+          .join("");
+
+        messageInput.val(transcript);
+      };
+
+      recognition.onend = () => {
+        messageInput.focus();
+      };
+    </script>
+  </body>
+</html>
