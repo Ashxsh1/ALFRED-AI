@@ -5,17 +5,14 @@
     <title>ALFRED-AI</title>
 
     <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"/>
     <script src="https://unpkg.com/@webcomponents/webcomponentsjs@^2.2.0"></script>
     <script src="https://unpkg.com/@web-speech-api/web-speech-ai@^2.2.0"></script>
   </head>
   <body>
     <div class="container">
       <h1 class="title">ALFRED</h1>
-      <div class="chat-window">
+      <div id="blah" class="chat-window">
         <ul class="message-list"></ul>
         <form class="message-form">
           <input
@@ -24,12 +21,18 @@
             placeholder="Type your message here..."
             autocomplete="off"
           />
-          <button type="submit">Send</button>
+          <button type="submit"><i class="fa fa-paper-plane"></i></button>
           <button type="button" id="mic-btn">
             <i class="fa fa-microphone"></i>
           </button>
         </form>
       </div>
+      <div style="display:block;width:fit-content;font-size:3rem" id="blah2">
+        <div class="typed">Unleash your inner creativity.</div>
+      </div>
+      <footer class="footer">
+        <p>© 2023 ALFRED. All rights reserved.</p>
+      </footer>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -39,6 +42,15 @@
       const micBtn = document.querySelector("#mic-btn");
       const messageInput = $('input[name="message"]');
       let isListening = false;
+
+
+      const check = document.getElementById("blah");
+      const check2 = document.getElementById("blah2");
+
+      setTimeout(function(){
+        check.style.display="block";
+        check2.style.display="none";
+      },3000);
 
       recognition.continuous = true;
       recognition.interimResults = true;

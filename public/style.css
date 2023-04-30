@@ -8,13 +8,19 @@ body {
   
   .container {
     max-width: 800px;
+    flex-direction: column;
+    display: flex;
+    height:100vh;
+    align-items: center;
+    justify-content: space-between;
     margin: 0 auto;
-    padding: 20px;
   }
   
   .chat-window {
     border: 1px solid #ccc;
     border-radius: 5px;
+    display: none;
+    width: 100%;
     overflow: hidden;
     height: 405px;
     margin-bottom: 20px;
@@ -84,7 +90,7 @@ body {
   }
   
   .chat-window .message-form button:hover {
-    background-color: #0062cc;
+    background-color: white;
   }
   
   .chat-window .message-form .mic-button {
@@ -98,12 +104,41 @@ body {
   }
   
   .chat-window .message-form .mic-icon {
-    color: #007bff;
+    color: black;
     font-size: 20px;
   }
   
   .chat-window .message-form .mic-icon:hover {
-    color: #0062cc;
+    color: black;
+  }
+  
+  .typed {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid;
+    width: 0;
+    animation: typing 1.4s steps(30, end) 1s 1 normal both, blinking 1s infinite;
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  @keyframes blinking {
+    0% {
+      border-color: transparent;
+    }
+    50% {
+      border-color: rgb(82, 81, 81);
+    }
+    100% {
+      border-color: transparent;
+    }
   }
   
   
